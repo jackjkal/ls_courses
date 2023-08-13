@@ -1,0 +1,8 @@
+welcome: "Welcome to the Mortgage Calculator"
+loan_amount: "Please enter the loan amount (e.g., 15000)"
+apr: "Please enter the Annual Percentage Rate (e.g., a whole number like 5)"
+loan_duration: "Please enter the loan duration in months (e.g., 12 for 12 months)"
+valid_number: "That doesn't look like a valid number."
+valid_integer: "That doesn't look like a valid integer."
+repeat: "Do you want to perform another calculation? (Y to calculate again)"
+goodbye: "Thank you for using the mortgage calculator. Goodbye!"
