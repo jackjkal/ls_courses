@@ -20,6 +20,10 @@ def number?(input)
   integer?(input) || float?(input)
 end
 
+def positive?(input)
+  number?(input) && input.to_f > 0
+end
+
 prompt(MESSAGES[:welcome])
 
 loop do
@@ -31,7 +35,7 @@ loop do
     prompt(MESSAGES[:loan_amount])
     loan_amount = gets.chomp
 
-    if !(loan_amount.empty?) && number?(loan_amount)
+    if !(loan_amount.empty?) && positive?(loan_amount)
       loan_amount = loan_amount.to_i
       break
     else
