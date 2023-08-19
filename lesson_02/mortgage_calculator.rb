@@ -1,6 +1,8 @@
 require 'yaml'
 
 MESSAGES = YAML.load_file('mortgage_messages.yml', symbolize_names: true)
+MONTHS_IN_YEAR = 12.0
+PERCENTAGE_CONVERSION = 100.0
 
 def prompt(message)
   puts "=> #{message}"
@@ -29,7 +31,7 @@ loop do
     prompt(MESSAGES[:loan_amount])
     loan_amount = gets.chomp
 
-    if number?(loan_amount)
+    if !(loan_amount.empty?) && number?(loan_amount)
       loan_amount = loan_amount.to_i
       break
     else
@@ -41,7 +43,7 @@ loop do
     prompt(MESSAGES[:apr])
     annual_percentage_rate = gets.chomp
 
-    if integer?(annual_percentage_rate)
+    if !(annual_percentage_rate.empty?) && integer?(annual_percentage_rate)
       annual_percentage_rate = annual_percentage_rate.to_i
       break
     else
@@ -53,13 +55,21 @@ loop do
     prompt(MESSAGES[:loan_duration])
     loan_duration = gets.chomp
 
-    if integer?(loan_duration)
+    if !(loan_duration.empty?) && integer?(loan_duration)
       loan_duration = loan_duration.to_i
       break
     else
       prompt(MESSAGES[:valid_integer])
     end
   end
+
+  monthly_interest_rate =
+    (annual_percentage_rate / MONTHS_IN_YEAR) / PERCENTAGE_CONVERSION
+  monthly_payment = loan_amount *
+                    (monthly_interest_rate /
+                    (1 - ((1 + monthly_interest_rate)**(-loan_duration))))
+
+  prompt("#{MESSAGES[:result]}#{monthly_payment.truncate(2)}")
 
   prompt(MESSAGES[:repeat])
   answer = gets.chomp
