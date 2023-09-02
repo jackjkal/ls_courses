@@ -9,6 +9,14 @@ VALID_CHOICES = {
   }
 }
 
+WIN_CONDITIONS = {
+  'rock' => ['lizard', 'scissors'],
+  'paper' => ['rock', 'spock'],
+  'scissors' => ['paper', 'lizard'],
+  'lizard' => ['paper', 'spock'],
+  'spock' => ['rock', 'scissors']
+}
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
@@ -29,15 +37,7 @@ def to_word(shorthand)
 end
 
 def win?(first, second)
-  win_conditions = {
-    'rock' => ['lizard', 'scissors'],
-    'paper' => ['rock', 'spock'],
-    'scissors' => ['paper', 'lizard'],
-    'lizard' => ['paper', 'spock'],
-    'spock' => ['rock', 'scissors']
-  }
-
-  win_conditions[first].include?(second)
+  WIN_CONDITIONS[first].include?(second)
 end
 
 def display_result(player, computer)
