@@ -30,7 +30,7 @@ end
 
 def valid_choice?(choice)
   VALID_CHOICES[:words].include?(choice) ||
-  VALID_CHOICES[:shorthand].include?(choice)
+    VALID_CHOICES[:shorthand].include?(choice)
 end
 
 def word?(text)
@@ -108,7 +108,7 @@ loop do
       unless word?(choice)
         choice = to_word(choice)
       end
-      
+
       break
     else
       prompt("That's not a valid choice")
